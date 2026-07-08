@@ -7,6 +7,7 @@ from app.api.router import router
 from app.config.database import engine
 from app.config.logger import logger
 from app.config.settings import settings
+from app.exceptions.handlers import register_exception_handlers
 from app.middleware.logging import LoggingMiddleware
 from app.middleware.request_id import RequestIDMiddleware
 
@@ -28,6 +29,7 @@ app = FastAPI(
     default_response_class=ORJSONResponse,
     lifespan=lifespan,
 )
+register_exception_handlers(app)
 app.add_middleware(LoggingMiddleware)
 app.add_middleware(RequestIDMiddleware)
 app.include_router(router)
