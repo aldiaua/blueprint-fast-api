@@ -1,3 +1,5 @@
+from fastapi import HTTPException, status
+
 from app.config.logger import logger
 from app.repositories.health_repository import HealthRepository
 from app.responses.api_response import ApiResponse
@@ -15,6 +17,11 @@ class HealthService:
             "health_check_finished",
             database=db_ok,
         )
+        if not db_ok:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail="Failed sync database",
+            )
         return ApiResponse(
             success=True,
             message="Health check success",
