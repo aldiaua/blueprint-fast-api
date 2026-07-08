@@ -1,9 +1,3 @@
-Noted. Berarti format standar response kamu menggunakan field `"success": true/false` (bukan `"status": "success"` seperti di draf saya sebelumnya).
-
-Berikut adalah penyesuaian **Technical Requirements Document (TRD)** yang sudah diselaraskan dengan standar API response milikmu.
-
----
-
 # Technical Requirements Document (TRD)
 
 ## Endpoint: Get Active Landing Page Layout
