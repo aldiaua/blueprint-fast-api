@@ -11,6 +11,9 @@ class Settings(BaseSettings):
     DB_USER: str
     DB_PASSWORD: str
 
+    # JWT Secret Key
+    SECRET_KEY: str
+
     model_config = SettingsConfigDict(
         env_file=".env",
         case_sensitive=True,

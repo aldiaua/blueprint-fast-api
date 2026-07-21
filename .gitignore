@@ -1,29 +1,40 @@
-# Virtual Environment
-.venv/
-
-# Python
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 
-# Environment
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+
+# Secrets
 .env
 
-# IDE
-.vscode/
+# IDE / Editor specific
 .idea/
+.vscode/
 
-# Testing
-.pytest_cache/
-
-# Ruff
-.ruff_cache/
-
-# Mypy
-.mypy_cache/
-
-# Logs
+# Log files
 *.log
-
-# Coverage
-.coverage
-htmlcov/
