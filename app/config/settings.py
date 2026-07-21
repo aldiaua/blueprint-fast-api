@@ -14,6 +14,9 @@ class Settings(BaseSettings):
     # JWT Secret Key
     SECRET_KEY: str
 
+    # Storage Configuration for local uploads
+    LOCAL_STORAGE_PATH: str = "uploads"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         case_sensitive=True,

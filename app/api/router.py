@@ -5,6 +5,7 @@ from app.api.v1.classes import router as classes_router
 from app.api.v1.cms import router as cms_router
 from app.api.v1.health import router as health_router
 from app.api.v1.landing import router as landing_router
+from app.api.v1.media import router as media_router
 from app.api.v1.page_sections import router as page_sections_router
 from app.api.v1.settings import router as settings_router
 from app.api.v1.students import router as students_router
@@ -59,4 +60,8 @@ router.include_router(
 router.include_router(
     cms_router,
     tags=["CMS"],
+)
+
+router.include_router(
+    media_router,
 )

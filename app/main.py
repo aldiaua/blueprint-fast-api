@@ -1,7 +1,9 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from pathlib import Path
 from fastapi.responses import ORJSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.api.router import router
 from app.config.database import engine
@@ -33,3 +35,10 @@ register_exception_handlers(app)
 app.add_middleware(LoggingMiddleware)
 app.add_middleware(RequestIDMiddleware)
 app.include_router(router)
+
+# Ensure the upload directory exists before mounting
+upload_dir = Path(settings.LOCAL_STORAGE_PATH)
+upload_dir.mkdir(parents=True, exist_ok=True)
+
+# Mount the 'uploads' directory to serve static files
+app.mount(f"/{settings.LOCAL_STORAGE_PATH}", StaticFiles(directory=settings.LOCAL_STORAGE_PATH), name="uploads")
