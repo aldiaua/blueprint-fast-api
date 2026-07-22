@@ -6,6 +6,7 @@ from fastapi.exceptions import (
 from fastapi.responses import JSONResponse
 
 from app.responses.api_response import ApiResponse
+from app.config.logger import logger
 
 
 def register_exception_handlers(app: FastAPI):
@@ -33,6 +34,8 @@ def register_exception_handlers(app: FastAPI):
             message=combined_message,
             data=parsed_errors,
         )
+        logger.error("validation_error", detail=combined_message)
+
 
         return JSONResponse(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -47,8 +50,26 @@ def register_exception_handlers(app: FastAPI):
             message=str(exc.detail),
             data=None,
         )
+        logger.error("http_exception", status_code=exc.status_code, detail=str(exc.detail))
 
         return JSONResponse(
             status_code=exc.status_code,
+            content=response_body.model_dump(),
+        )
+
+    @app.exception_handler(Exception)
+    async def unhandled_exception_handler(
+        request: Request,
+        exc: Exception,
+    ):
+        response_body = ApiResponse[None](
+            success=False,
+            message="Internal Server Error",
+            data=None,
+        )
+        logger.error("unhandled_exception", error=str(exc), exc_info=True)
+
+        return JSONResponse(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             content=response_body.model_dump(),
         )
