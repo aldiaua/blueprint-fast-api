@@ -7,7 +7,7 @@ log_file = "app.log"
 
 file_handler = TimedRotatingFileHandler(log_file, when="midnight", interval=1, backupCount=30)
 file_handler.suffix = "%Y-%m-%d"
-file_handler.setFormatter(logging.Formatter("%(message)s")) # Hanya string JSON mentah
+file_handler.setFormatter(logging.Formatter("%(message)s"))
 
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setFormatter(logging.Formatter("%(message)s"))
