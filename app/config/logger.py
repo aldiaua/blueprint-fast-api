@@ -1,11 +1,22 @@
 import logging
 from logging.handlers import TimedRotatingFileHandler
+import os
 import sys
 import structlog
 
-log_file = "app.log"
+LOG_DIR = "logs"
+LOG_FILE = os.path.join(LOG_DIR, "app.log")
 
-file_handler = TimedRotatingFileHandler(log_file, when="midnight", interval=1, backupCount=30)
+os.makedirs(LOG_DIR, exist_ok=True)
+
+file_handler = TimedRotatingFileHandler(
+    filename=LOG_FILE,
+    when="midnight",
+    interval=1,
+    backupCount=30,
+    encoding="utf-8",
+)
+
 file_handler.suffix = "%Y-%m-%d"
 file_handler.setFormatter(logging.Formatter("%(message)s"))
 

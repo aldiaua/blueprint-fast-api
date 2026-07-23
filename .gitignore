@@ -38,6 +38,9 @@ ENV/
 
 # Log files
 *.log
+*.log.*
 
 # User-uploaded files
 /uploads/
+
+/logs/
