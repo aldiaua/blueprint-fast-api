@@ -1,3 +1,4 @@
+```markdown
 # 🚀 Blueprint Service
 
 Production-ready FastAPI microservice blueprint using Service Repository Pattern.
@@ -21,19 +22,22 @@ Production-ready FastAPI microservice blueprint using Service Repository Pattern
 
 ## Tech Stack
 
-- Python 3.12+
+- Python 3.12+ (Compatible with Python 3.14)
 - FastAPI
 - SQLAlchemy Async
 - PostgreSQL
 - Pydantic v2
 - Alembic
 - Uvicorn
+- Poetry (Dependency Management)
 
 ---
 
 ## Project Structure
 
+
 ```
+
 app
 ├── api
 ├── config
@@ -47,6 +51,7 @@ app
 ├── services
 ├── utils
 └── main.py
+
 ```
 
 ---
@@ -59,33 +64,17 @@ Clone repository
 git clone <repository-url>
 
 cd Blueprint-Service
+
 ```
 
-Create virtual environment
+Install dependencies using Poetry
 
 ```bash
-python3 -m venv .venv
+poetry install
+
 ```
 
-Activate virtual environment
-
-Linux / macOS
-
-```bash
-source .venv/bin/activate
-```
-
-Windows
-
-```cmd
-.venv\Scripts\activate
-```
-
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
+*(Opsional: Jika Anda ingin agar folder virtual environment otomatis terbuat di dalam direktori proyek, jalankan `poetry config virtualenvs.in-project true` sebelum melakukan instalasi).*
 
 ---
 
@@ -95,13 +84,13 @@ Copy
 
 ```bash
 cp .env.example .env
+
 ```
 
 Example
 
 ```env
-APP_NAME=Blueprint Service
-APP_ENV=development
+APP_NAME=YearBook Service
 APP_DEBUG=true
 APP_VERSION=1.0.0
 
@@ -109,7 +98,28 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=blueprint_service_db
 DB_USER=postgres
-DB_PASSWORD=postgres
+DB_PASSWORD=lerd
+
+SECRET_KEY="09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
+
+```
+
+---
+
+## Database Migration & Seeding
+
+Jalankan migrasi database menggunakan Alembic:
+
+```bash
+poetry run alembic upgrade head
+
+```
+
+Masukkan data awal (*seeding*) ke database:
+
+```bash
+poetry run python -m app.scripts.seed
+
 ```
 
 ---
@@ -119,13 +129,15 @@ DB_PASSWORD=postgres
 Development
 
 ```bash
-python -m uvicorn app.main:app --reload
+poetry run uvicorn app.main:app --reload
+
 ```
 
 Open Swagger
 
 ```
-http://127.0.0.1:8000/docs
+[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
 ```
 
 ---
@@ -134,6 +146,7 @@ http://127.0.0.1:8000/docs
 
 ```
 GET /api/v1/health
+
 ```
 
 Response
@@ -143,6 +156,7 @@ Response
     "status": "UP",
     "database": "UP"
 }
+
 ```
 
 ---
@@ -167,6 +181,7 @@ Repository
 ↓
 
 PostgreSQL
+
 ```
 
 ---
@@ -175,52 +190,56 @@ PostgreSQL
 
 ### Router
 
-- Handle HTTP Request
-- Validation
-- Call Service
+* Handle HTTP Request
+* Validation
+* Call Service
 
 ### Service
 
-- Business Logic
+* Business Logic
 
 ### Repository
 
-- Database Query
+* Database Query
 
 ### Model
 
-- SQLAlchemy ORM
+* SQLAlchemy ORM
 
 ### Schema
 
-- Request & Response
+* Request & Response
 
 ---
 
 ## Roadmap
 
-- [x] FastAPI
-- [x] Async SQLAlchemy
-- [x] Repository Pattern
-- [x] Service Pattern
-- [x] Dependency Injection
-- [x] Health Check
+* [x] FastAPI
+* [x] Async SQLAlchemy
+* [x] Repository Pattern
+* [x] Service Pattern
+* [x] Dependency Injection
+* [x] Health Check
 
 ### Next
 
-- [ ] Structured Logger
-- [ ] Request ID Middleware
-- [ ] Generic Response
-- [ ] Global Exception
-- [ ] Base Repository
-- [ ] Base Service
-- [ ] JWT Authentication
-- [ ] Redis
-- [ ] Docker
-- [ ] GitHub Actions
+* [ ] Structured Logger
+* [ ] Request ID Middleware
+* [ ] Generic Response
+* [ ] Global Exception
+* [ ] Base Repository
+* [ ] Base Service
+* [ ] JWT Authentication
+* [ ] Redis
+* [ ] Docker
+* [ ] GitHub Actions
 
 ---
 
 ## License
 
 MIT
+
+```
+
+```
