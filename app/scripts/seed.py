@@ -6,7 +6,6 @@ Run with: python -m app.scripts.seed
 import asyncio
 
 from sqlalchemy import func, insert, select
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config.database import AsyncSessionLocal
 from app.models.base import Class, PageSection, Setting, Student, Teacher, User

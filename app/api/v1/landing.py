@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict
 from fastapi import APIRouter, Depends, status
 
 from app.dependencies.classes import get_class_service
