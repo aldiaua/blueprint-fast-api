@@ -1,4 +1,3 @@
-```markdown
 # 🚀 Blueprint Service
 
 Production-ready FastAPI microservice blueprint using Service Repository Pattern.
@@ -29,15 +28,13 @@ Production-ready FastAPI microservice blueprint using Service Repository Pattern
 - Pydantic v2
 - Alembic
 - Uvicorn
-- Poetry (Dependency Management)
+- uv (Dependency Management)
 
 ---
 
 ## Project Structure
 
-
 ```
-
 app
 ├── api
 ├── config
@@ -51,7 +48,6 @@ app
 ├── services
 ├── utils
 └── main.py
-
 ```
 
 ---
@@ -64,17 +60,23 @@ Clone repository
 git clone <repository-url>
 
 cd Blueprint-Service
-
 ```
 
-Install dependencies using Poetry
+Install [uv](https://docs.astral.sh/uv/) (kalau belum ada)
 
 ```bash
-poetry install
-
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-*(Opsional: Jika Anda ingin agar folder virtual environment otomatis terbuat di dalam direktori proyek, jalankan `poetry config virtualenvs.in-project true` sebelum melakukan instalasi).*
+Install dependencies using uv
+
+```bash
+uv sync
+```
+
+*(uv otomatis membuat virtual environment `.venv` di dalam direktori proyek, tidak perlu konfigurasi tambahan seperti di Poetry).*
+
+*(Opsional: Jika Anda ingin memastikan environment terinstall persis sesuai `uv.lock` tanpa re-resolve dependency, gunakan `uv sync --frozen`).*
 
 ---
 
@@ -84,7 +86,6 @@ Copy
 
 ```bash
 cp .env.example .env
-
 ```
 
 Example
@@ -101,7 +102,6 @@ DB_USER=postgres
 DB_PASSWORD=lerd
 
 SECRET_KEY="09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
-
 ```
 
 ---
@@ -111,15 +111,13 @@ SECRET_KEY="09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 Jalankan migrasi database menggunakan Alembic:
 
 ```bash
-poetry run alembic upgrade head
-
+uv run alembic upgrade head
 ```
 
 Masukkan data awal (*seeding*) ke database:
 
 ```bash
-poetry run python -m app.scripts.seed
-
+uv run python -m app.scripts.seed
 ```
 
 ---
@@ -129,15 +127,13 @@ poetry run python -m app.scripts.seed
 Development
 
 ```bash
-poetry run uvicorn app.main:app --reload
-
+uv run uvicorn app.main:app --reload
 ```
 
 Open Swagger
 
 ```
-[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-
+http://127.0.0.1:8000/docs
 ```
 
 ---
@@ -146,17 +142,15 @@ Open Swagger
 
 ```
 GET /api/v1/health
-
 ```
 
 Response
 
 ```json
 {
-    "status": "UP",
-    "database": "UP"
+  "status": "UP",
+  "database": "UP"
 }
-
 ```
 
 ---
@@ -181,7 +175,6 @@ Repository
 ↓
 
 PostgreSQL
-
 ```
 
 ---
@@ -190,56 +183,52 @@ PostgreSQL
 
 ### Router
 
-* Handle HTTP Request
-* Validation
-* Call Service
+- Handle HTTP Request
+- Validation
+- Call Service
 
 ### Service
 
-* Business Logic
+- Business Logic
 
 ### Repository
 
-* Database Query
+- Database Query
 
 ### Model
 
-* SQLAlchemy ORM
+- SQLAlchemy ORM
 
 ### Schema
 
-* Request & Response
+- Request & Response
 
 ---
 
 ## Roadmap
 
-* [x] FastAPI
-* [x] Async SQLAlchemy
-* [x] Repository Pattern
-* [x] Service Pattern
-* [x] Dependency Injection
-* [x] Health Check
+- [x] FastAPI
+- [x] Async SQLAlchemy
+- [x] Repository Pattern
+- [x] Service Pattern
+- [x] Dependency Injection
+- [x] Health Check
 
 ### Next
 
-* [ ] Structured Logger
-* [ ] Request ID Middleware
-* [ ] Generic Response
-* [ ] Global Exception
-* [ ] Base Repository
-* [ ] Base Service
-* [ ] JWT Authentication
-* [ ] Redis
-* [ ] Docker
-* [ ] GitHub Actions
+- [ ] Structured Logger
+- [ ] Request ID Middleware
+- [ ] Generic Response
+- [ ] Global Exception
+- [ ] Base Repository
+- [ ] Base Service
+- [ ] JWT Authentication
+- [ ] Redis
+- [ ] Docker
+- [ ] GitHub Actions
 
 ---
 
 ## License
 
 MIT
-
-```
-
-```
